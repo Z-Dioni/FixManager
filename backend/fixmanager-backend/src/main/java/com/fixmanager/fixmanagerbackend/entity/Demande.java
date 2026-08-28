@@ -6,9 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "demande")
@@ -31,6 +35,12 @@ public class Demande {
     @ManyToOne
     @JoinColumn(name = "id_utilisateur", nullable = false)
     private Utilisateur utilisateur;
+
+    @OneToMany(mappedBy = "demande")
+    private List<Accessoire> accessoires = new ArrayList<>();
+
+    @OneToOne(mappedBy = "demande")
+    private Devis devis;
 
     public Demande() {
     }
@@ -97,5 +107,21 @@ public class Demande {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public List<Accessoire> getAccessoires() {
+        return accessoires;
+    }
+
+    public void setAccessoires(List<Accessoire> accessoires) {
+        this.accessoires = accessoires;
+    }
+
+    public Devis getDevis() {
+        return devis;
+    }
+
+    public void setDevis(Devis devis) {
+        this.devis = devis;
     }
 }
