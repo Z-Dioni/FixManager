@@ -41,6 +41,12 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     private List<InterventionTechnicien> interventions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Paiement> paiements = new ArrayList<>();
+
+    @OneToMany(mappedBy = "utilisateur")
+    private List<MouvementCaisse> mouvementsCaisse = new ArrayList<>();
+
     public Utilisateur() {
     }
 
@@ -114,5 +120,21 @@ public class Utilisateur {
 
     public void setInterventions(List<InterventionTechnicien> interventions) {
         this.interventions = interventions;
+    }
+
+    public List<Paiement> getPaiements() {
+        return paiements;
+    }
+
+    public void setPaiements(List<Paiement> paiements) {
+        this.paiements = paiements;
+    }
+
+    public List<MouvementCaisse> getMouvementsCaisse() {
+        return mouvementsCaisse;
+    }
+
+    public void setMouvementsCaisse(List<MouvementCaisse> mouvementsCaisse) {
+        this.mouvementsCaisse = mouvementsCaisse;
     }
 }

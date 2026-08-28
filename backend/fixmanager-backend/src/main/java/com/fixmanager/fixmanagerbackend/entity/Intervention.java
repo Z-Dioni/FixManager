@@ -36,6 +36,9 @@ public class Intervention {
     @OneToMany(mappedBy = "intervention")
     private List<InterventionPiece> pieces = new ArrayList<>();
 
+    @OneToOne(mappedBy = "intervention")
+    private Facture facture;
+
     public Intervention() {
     }
 
@@ -109,5 +112,13 @@ public class Intervention {
 
     public void setPieces(List<InterventionPiece> pieces) {
         this.pieces = pieces;
+    }
+
+    public Facture getFacture() {
+        return facture;
+    }
+
+    public void setFacture(Facture facture) {
+        this.facture = facture;
     }
 }
