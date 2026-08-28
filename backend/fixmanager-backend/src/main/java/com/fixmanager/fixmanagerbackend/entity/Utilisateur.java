@@ -7,9 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,6 +37,9 @@ public class Utilisateur {
             inverseJoinColumns = @JoinColumn(name = "id_role")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "utilisateur")
+    private List<InterventionTechnicien> interventions = new ArrayList<>();
 
     public Utilisateur() {
     }
@@ -100,5 +106,13 @@ public class Utilisateur {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<InterventionTechnicien> getInterventions() {
+        return interventions;
+    }
+
+    public void setInterventions(List<InterventionTechnicien> interventions) {
+        this.interventions = interventions;
     }
 }
