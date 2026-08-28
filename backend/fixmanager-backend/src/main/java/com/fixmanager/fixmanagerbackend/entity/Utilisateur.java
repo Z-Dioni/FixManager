@@ -47,6 +47,9 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     private List<MouvementCaisse> mouvementsCaisse = new ArrayList<>();
 
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Historique> historiques = new ArrayList<>();
+
     public Utilisateur() {
     }
 
@@ -136,5 +139,13 @@ public class Utilisateur {
 
     public void setMouvementsCaisse(List<MouvementCaisse> mouvementsCaisse) {
         this.mouvementsCaisse = mouvementsCaisse;
+    }
+
+    public List<Historique> getHistoriques() {
+        return historiques;
+    }
+
+    public void setHistoriques(List<Historique> historiques) {
+        this.historiques = historiques;
     }
 }
