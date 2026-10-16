@@ -1,6 +1,8 @@
 package com.fixmanager.fixmanagerbackend.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,6 +25,7 @@ public class Devis {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDevis;
 
+    @Column(unique = true)
     private String reference;
     private LocalDateTime dateDevis;
     private LocalDate dateValidite;
@@ -33,7 +36,7 @@ public class Devis {
     @JoinColumn(name = "id_demande", nullable = false, unique = true)
     private Demande demande;
 
-    @OneToMany(mappedBy = "devis")
+    @OneToMany(mappedBy = "devis", cascade = CascadeType.ALL)
     private List<LigneDevis> lignes = new ArrayList<>();
 
     public Devis() {

@@ -1,6 +1,8 @@
 package com.fixmanager.fixmanagerbackend.entity;
 
 import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,6 +24,7 @@ public class Demande {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDemande;
 
+    @Column(unique = true)
     private String reference;
     private String description;
     private LocalDateTime dateDemande;
@@ -117,6 +120,7 @@ public class Demande {
         this.accessoires = accessoires;
     }
 
+    @JsonIgnore
     public Devis getDevis() {
         return devis;
     }

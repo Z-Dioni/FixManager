@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Client {
     private String adresse;
 
     @OneToMany(mappedBy = "client")
+    @JsonIgnore
     private List<Machine> machines = new ArrayList<>();
 
     public Client() {
@@ -78,6 +80,7 @@ public class Client {
         this.adresse = adresse;
     }
 
+    @JsonIgnore
     public List<Machine> getMachines() {
         return machines;
     }

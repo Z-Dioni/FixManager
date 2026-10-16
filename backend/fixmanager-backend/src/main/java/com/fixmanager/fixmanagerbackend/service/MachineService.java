@@ -25,6 +25,12 @@ public class MachineService {
     }
 
     public Machine save(Machine machine) {
+        if (machine.getIdMachine() == null) {
+            Machine savedMachine = repository.save(machine);
+            savedMachine.setReference(String.format("MACH-%04d", savedMachine.getIdMachine()));
+            return repository.save(savedMachine);
+        }
+
         return repository.save(machine);
     }
 

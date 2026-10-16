@@ -1,6 +1,8 @@
 package com.fixmanager.fixmanagerbackend.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,6 +24,7 @@ public class Facture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFacture;
 
+    @Column(unique = true)
     private String reference;
     private LocalDateTime dateFacture;
     private BigDecimal total = BigDecimal.ZERO;
@@ -31,7 +34,7 @@ public class Facture {
     @JoinColumn(name = "id_intervention", nullable = false, unique = true)
     private Intervention intervention;
 
-    @OneToMany(mappedBy = "facture")
+    @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL)
     private List<LigneFacture> lignes = new ArrayList<>();
 
     @OneToMany(mappedBy = "facture")

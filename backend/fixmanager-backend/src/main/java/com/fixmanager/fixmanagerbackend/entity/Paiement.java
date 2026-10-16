@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -70,6 +71,7 @@ public class Paiement {
         this.modePaiement = modePaiement;
     }
 
+    @JsonIgnore
     public Facture getFacture() {
         return facture;
     }

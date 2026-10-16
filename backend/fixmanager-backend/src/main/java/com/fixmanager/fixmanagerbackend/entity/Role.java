@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Role {
     private String nom;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Set<Utilisateur> utilisateurs = new HashSet<>();
 
     public Role() {

@@ -12,6 +12,8 @@ Prerequis : Docker et Docker Compose.
 
 2. Modifier les mots de passe dans `.env` si necessaire. Le fichier `.env` reste local et ne doit pas etre pousse sur GitHub.
 
+Pour creer ou reinitialiser le compte administrateur au demarrage, renseigner aussi `FIXMANAGER_ADMIN_EMAIL` et `FIXMANAGER_ADMIN_PASSWORD` dans `.env`. Le mot de passe est chiffre en BCrypt par le backend et ces variables ne doivent jamais etre committees.
+
 3. Construire et demarrer MySQL et le backend :
 
 	```bash
@@ -28,6 +30,20 @@ Prerequis : Docker et Docker Compose.
 	```
 
 La base est conservee dans le volume Docker `fixmanager_mysql_data`. Arreter les conteneurs avec `docker compose down` ne supprime donc pas les donnees. Pour repartir d'une base vide, utiliser explicitement `docker compose down -v`.
+
+## Developpement du frontend
+
+Prerequis : Node.js et npm. Demarrer le backend avec Docker, puis dans un autre terminal :
+
+```bash
+cd frontend/fixmanager-frontend
+npm ci
+npm run dev
+```
+
+Vite affiche l'URL locale du frontend (par defaut `http://localhost:5173`). Les requetes `/api` sont transmises au backend local sur le port `8080`.
+
+Pour les tests E2E, demarrer le backend avec un compte administrateur de test puis definir `E2E_ADMIN_EMAIL` et `E2E_ADMIN_PASSWORD` dans l'environnement du terminal avant `npm run test:e2e`. Ne jamais ajouter ces identifiants dans les fichiers du depot.
 
 ## Developpement du backend hors Docker
 

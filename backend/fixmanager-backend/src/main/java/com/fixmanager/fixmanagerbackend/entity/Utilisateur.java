@@ -9,6 +9,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +29,7 @@ public class Utilisateur {
     private String prenom;
     private String email;
     private String telephone;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private boolean actif = true;
 
@@ -36,18 +39,23 @@ public class Utilisateur {
             joinColumns = @JoinColumn(name = "id_utilisateur"),
             inverseJoinColumns = @JoinColumn(name = "id_role")
     )
+    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
     private List<InterventionTechnicien> interventions = new ArrayList<>();
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
     private List<Paiement> paiements = new ArrayList<>();
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
     private List<MouvementCaisse> mouvementsCaisse = new ArrayList<>();
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
     private List<Historique> historiques = new ArrayList<>();
 
     public Utilisateur() {

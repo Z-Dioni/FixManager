@@ -27,10 +27,12 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
       SPRING_APPLICATION_NAME: fixmanager-backend
+      FIXMANAGER_ADMIN_EMAIL: ${FIXMANAGER_ADMIN_EMAIL:-}
+      FIXMANAGER_ADMIN_PASSWORD: ${FIXMANAGER_ADMIN_PASSWORD:-}
     ports:
       - "8080:8080"
     restart: unless-stopped

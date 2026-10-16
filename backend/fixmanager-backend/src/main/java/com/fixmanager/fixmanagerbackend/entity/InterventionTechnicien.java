@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "intervention_technicien")
@@ -23,6 +24,7 @@ public class InterventionTechnicien {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idUtilisateur")
     @JoinColumn(name = "id_utilisateur", nullable = false)
+    @JsonIgnore
     private Utilisateur utilisateur;
 
     public InterventionTechnicien() {

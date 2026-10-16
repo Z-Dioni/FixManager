@@ -20,6 +20,10 @@ public class DevisController {
     @PostMapping public ResponseEntity<Devis> create(@RequestBody Devis value) {
         return ResponseEntity.ok(service.save(value));
     }
+    @PatchMapping("/{id}/statut") public ResponseEntity<Devis> updateStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> body) {
+        if (!service.findById(id).isPresent() || body.get("statut") == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(service.updateStatus(id, body.get("statut")));
+    }
     @PutMapping("/{id}") public ResponseEntity<Devis> update(@PathVariable Long id, @RequestBody Devis value) {
         if (service.findById(id).isEmpty()) return ResponseEntity.notFound().build();
         value.setIdDevis(id);

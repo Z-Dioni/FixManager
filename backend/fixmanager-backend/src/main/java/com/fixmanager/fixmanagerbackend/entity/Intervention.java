@@ -1,6 +1,8 @@
 package com.fixmanager.fixmanagerbackend.entity;
 
 import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +22,7 @@ public class Intervention {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIntervention;
 
+    @Column(unique = true)
     private String reference;
     private String diagnostic;
     private String causePanne;
@@ -114,6 +117,7 @@ public class Intervention {
         this.pieces = pieces;
     }
 
+    @JsonIgnore
     public Facture getFacture() {
         return facture;
     }

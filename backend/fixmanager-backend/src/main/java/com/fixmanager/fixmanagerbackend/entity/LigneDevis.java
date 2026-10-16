@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 
@@ -70,6 +71,7 @@ public class LigneDevis {
         this.total = total;
     }
 
+    @JsonIgnore
     public Devis getDevis() {
         return devis;
     }

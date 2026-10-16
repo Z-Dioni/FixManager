@@ -17,6 +17,15 @@ public class InterventionService {
 
     public List<Intervention> findAll() { return repository.findAll(); }
     public Optional<Intervention> findById(Long id) { return repository.findById(id); }
-    public Intervention save(Intervention intervention) { return repository.save(intervention); }
+    public Intervention save(Intervention intervention) {
+        if (intervention.getIdIntervention() == null) {
+            intervention.setStatut("NOUVELLE");
+            Intervention savedIntervention = repository.save(intervention);
+            savedIntervention.setReference(String.format("INT-%04d", savedIntervention.getIdIntervention()));
+            return repository.save(savedIntervention);
+        }
+
+        return repository.save(intervention);
+    }
     public void deleteById(Long id) { repository.deleteById(id); }
 }

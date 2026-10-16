@@ -1,6 +1,7 @@
 package com.fixmanager.fixmanagerbackend.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +19,7 @@ public class Machine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMachine;
 
+    @Column(unique = true)
     private String reference;
     private String nom;
     private String marque;
@@ -25,6 +27,7 @@ public class Machine {
     private LocalDate dateAcquisition;
     private LocalDate dateMiseEnService;
     private String etat;
+    private String problemeSignale;
 
     @ManyToOne
     @JoinColumn(name = "id_client", nullable = false)
@@ -95,6 +98,14 @@ public class Machine {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+
+    public String getProblemeSignale() {
+        return problemeSignale;
+    }
+
+    public void setProblemeSignale(String problemeSignale) {
+        this.problemeSignale = problemeSignale;
     }
 
     public Client getClient() {
